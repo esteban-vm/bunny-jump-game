@@ -7,7 +7,6 @@ const Main = class extends Phaser.Scene {
   private carrots!: Phaser.Physics.Arcade.Group
   private platforms!: Phaser.Physics.Arcade.StaticGroup
   private keys!: Phaser.Types.Input.Keyboard.CursorKeys
-  private pointer!: Phaser.Input.Pointer
   private carrotsCollected!: number
   private carrotsCollectedText!: Phaser.GameObjects.Text
 
@@ -40,7 +39,6 @@ const Main = class extends Phaser.Scene {
     this.cameras.main.setDeadzone(this.scale.width * 1.5)
 
     this.keys = this.input.keyboard!.createCursorKeys()
-    this.pointer = this.input.activePointer
     this.carrots = this.physics.add.group({ classType: Carrot })
 
     const { bunny, platforms, carrots } = this
@@ -90,17 +88,6 @@ const Main = class extends Phaser.Scene {
       this.bunny.setVelocityX(200)
     } else {
       this.bunny.setVelocityX(0)
-    }
-
-    if (this.pointer.isDown && !isTouchingDown) {
-      const { upX, downX } = this.pointer
-      if (Math.abs(upX - downX) >= 100) {
-        if (upX < downX) {
-          this.bunny.setVelocityX(-200)
-        } else if (upX > downX) {
-          this.bunny.setVelocityX(200)
-        }
-      }
     }
 
     this.horizontalWrap(this.bunny)

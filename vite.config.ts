@@ -13,7 +13,7 @@ export default defineConfig({
         short_name: 'Bunny Jump Game',
         description: 'Game made with Phaser JS, Vite and TypeScript',
         display: 'fullscreen',
-        orientation: 'any',
+        orientation: 'portrait',
         start_url: '/',
         icons: [
           {
