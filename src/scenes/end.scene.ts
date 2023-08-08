@@ -1,5 +1,5 @@
 import Phaser from 'phaser'
-import { Scenes } from '@/constants'
+import { Scenes, Textures } from '@/constants'
 
 const End = class extends Phaser.Scene {
   constructor() {
@@ -7,13 +7,13 @@ const End = class extends Phaser.Scene {
   }
 
   public create() {
-    this.add.text(this.scale.width / 2, this.scale.height / 2, 'Game Over', { fontSize: '48px' }).setOrigin(0.5)
-    this.input.keyboard?.once('keydown-SPACE', this.restart)
-    this.input.on('pointerdown', this.restart)
-  }
-
-  private restart = () => {
-    this.scene.start(Scenes.Main)
+    const { width, height } = this.scale
+    const text1 = 'Game Over'
+    const text2 = 'Press space to restart'
+    this.add.image(width / 2, height / 3, Textures.BunnyHurt).setScale(0.7)
+    this.add.text(width / 2, height / 2, text1, { fontSize: '48px' }).setOrigin(0.5)
+    this.add.text(width / 2, (height * 2) / 3, text2, { fontSize: '32px' }).setOrigin(0.5)
+    this.input.keyboard?.once('keydown-SPACE', () => this.scene.start(Scenes.Main))
   }
 }
 
